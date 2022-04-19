@@ -1,4 +1,5 @@
 using catalog.DAL;
+using catalog.DAL.Models;
 using catalog.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("CatalogDb")));
-builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<ICrudRepository<Category>, CategoryRepository>();
+builder.Services.AddTransient<ICrudRepository<Brand>, BrandRepository>();
 
 var app = builder.Build();
 

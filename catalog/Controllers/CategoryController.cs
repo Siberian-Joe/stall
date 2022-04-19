@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace catalog.Controllers
 {
     [Route("api/[controller]")]
-    public class CatalogController : Controller
+    public class CategoryController : Controller
     {
-        readonly private ICategoryRepository _categoryRepository;
+        readonly private ICrudRepository<Category> _categoryRepository;
 
-        public CatalogController(ICategoryRepository categoryRepository)
+        public CategoryController(ICrudRepository<Category> categoryRepository)
         {
-            _categoryRepository = (CategoryRepository)categoryRepository;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpGet(Name = "GetAllCategories")]
