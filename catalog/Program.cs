@@ -4,6 +4,7 @@ using catalog.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+string connectionString = builder.Configuration.GetConnectionString("CatalogDb");
 
 builder.Services.AddRazorPages();
 
@@ -12,9 +13,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("CatalogDb")));
+builder.Services.AddDbContext<DataContext>(options => options.UseLazyLoadingProxies().UseNpgsql(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+
 builder.Services.AddTransient<ICrudRepository<Category>, CategoryRepository>();
 builder.Services.AddTransient<ICrudRepository<Brand>, BrandRepository>();
+builder.Services.AddTransient<ICrudRepository<Product>, ProductRepository>();
 
 var app = builder.Build();
 

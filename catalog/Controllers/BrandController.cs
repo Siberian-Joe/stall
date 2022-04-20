@@ -9,9 +9,9 @@ namespace catalog.Controllers
     {
         readonly private ICrudRepository<Brand> _brandRepository;
 
-        public BrandController(ICrudRepository<Brand> categoryRepository)
+        public BrandController(ICrudRepository<Brand> brandRepository)
         {
-            _brandRepository = categoryRepository;
+            _brandRepository = brandRepository;
         }
 
         [HttpGet(Name = "GetAllBrands")]
