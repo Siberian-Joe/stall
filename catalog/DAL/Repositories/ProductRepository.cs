@@ -1,27 +1,15 @@
 ﻿using catalog.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace catalog.DAL.Repositories
 {
-    public class ProductRepository : ICrudRepository<Product>
+    public class ProductRepository : Repository<Product>
     {
-        private DataContext _context;
-
-        public ProductRepository(DataContext context)
+        public ProductRepository(DataContext context) : base(context)
         {
-            _context = context;
         }
 
-        public IEnumerable<Product> Get()
-        {
-            return _context.Products;
-        }
-
-        public Product Get(int id)
-        {
-            return _context.Products.Find(id);
-        }
-
-        public void Create(Product item)
+        public override void Create(Product item)
         {
             item.Category = _context.Categories.Find(item.Category.Id);
             item.Brand = _context.Brands.Find(item.Brand.Id);
@@ -30,7 +18,7 @@ namespace catalog.DAL.Repositories
             _context.SaveChanges();
         }
 
-        public void Update(Product updatedItem)
+        public override void Update(Product updatedItem)
         {
             Product currentItem = Get(updatedItem.Id);
             currentItem.Title = updatedItem.Title;
@@ -42,17 +30,9 @@ namespace catalog.DAL.Repositories
             _context.SaveChanges();
         }
 
-        public Product Delete(int id)
+        protected override DbSet<Product> GetData()
         {
-            Product item = Get(id);
-
-            if (item != null)
-            {
-                _context.Products.Remove(item);
-                _context.SaveChanges();
-            }
-
-            return item;
+            return _context.Products;
         }
     }
 }

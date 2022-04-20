@@ -1,8 +1,7 @@
 ﻿namespace catalog.DAL.Models
 {
-    public class Brand
+    public class Brand : Model
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
+
     }
 }
