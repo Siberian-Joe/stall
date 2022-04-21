@@ -7,9 +7,9 @@ namespace catalog.Controllers
     [Route("api/[controller]")]
     public class BrandController : Controller
     {
-        readonly private ICrudRepository<Brand> _brandRepository;
+        readonly private BrandRepository _brandRepository;
 
-        public BrandController(ICrudRepository<Brand> brandRepository)
+        public BrandController(BrandRepository brandRepository)
         {
             _brandRepository = brandRepository;
         }

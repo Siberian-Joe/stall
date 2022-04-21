@@ -7,9 +7,9 @@ namespace catalog.Controllers
     [Route("api/[controller]")]
     public class CategoryController : Controller
     {
-        readonly private ICrudRepository<Category> _categoryRepository;
+        readonly private CategoryRepository _categoryRepository;
 
-        public CategoryController(ICrudRepository<Category> categoryRepository)
+        public CategoryController(CategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }

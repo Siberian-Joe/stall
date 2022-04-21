@@ -7,9 +7,9 @@ namespace catalog.Controllers
     [Route("api/[controller]")]
     public class ProductController : Controller
     {
-        readonly private ICrudRepository<Product> _productRepository;
+        readonly private ProductRepository _productRepository;
 
-        public ProductController(ICrudRepository<Product> productRepository)
+        public ProductController(ProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
@@ -64,6 +64,16 @@ namespace catalog.Controllers
             _productRepository.Delete(id);
 
             return RedirectToRoute("GetAllProducts");
+        }
+
+        [Route("search")]
+        [HttpGet]
+        public IActionResult FindProductByTitle(string title)
+        {
+            if (string.IsNullOrEmpty(title) == false)
+                return Ok(_productRepository.FindProductByTitle(title));
+            else
+                return BadRequest();
         }
     }
 }

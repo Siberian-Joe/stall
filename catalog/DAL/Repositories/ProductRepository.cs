@@ -30,6 +30,11 @@ namespace catalog.DAL.Repositories
             _context.SaveChanges();
         }
 
+        public IEnumerable<Product> FindProductByTitle(string title)
+        {
+            return GetData().Where(item => item.Title == title);
+        }
+
         protected override DbSet<Product> GetData()
         {
             return _context.Products;

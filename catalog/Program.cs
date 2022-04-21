@@ -1,5 +1,4 @@
 using catalog.DAL;
-using catalog.DAL.Models;
 using catalog.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +14,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(options => options.UseLazyLoadingProxies().UseNpgsql(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
-builder.Services.AddTransient<ICrudRepository<Category>, CategoryRepository>();
-builder.Services.AddTransient<ICrudRepository<Brand>, BrandRepository>();
-builder.Services.AddTransient<ICrudRepository<Product>, ProductRepository>();
+builder.Services.AddTransient<CategoryRepository>();
+builder.Services.AddTransient<BrandRepository>();
+builder.Services.AddTransient<ProductRepository>();
 
 var app = builder.Build();
 
