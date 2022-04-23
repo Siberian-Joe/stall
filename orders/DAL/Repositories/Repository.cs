@@ -1,7 +1,7 @@
-﻿using catalog.DAL.Models;
+﻿using orders.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace catalog.DAL.Repositories
+namespace orders.DAL.Repositories
 {
     public abstract class Repository<T> : ICrudRepository<T> where T : Model
     {

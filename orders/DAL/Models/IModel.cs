@@ -1,4 +1,4 @@
-﻿namespace catalog.DAL.Models
+﻿namespace orders.DAL.Models
 {
     public interface IModel
     {

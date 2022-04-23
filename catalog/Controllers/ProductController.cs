@@ -68,10 +68,10 @@ namespace catalog.Controllers
 
         [Route("search")]
         [HttpGet]
-        public IActionResult FindProductByTitle(string title)
+        public IActionResult FindProductByTitle(string name)
         {
-            if (string.IsNullOrEmpty(title) == false)
-                return Ok(_productRepository.FindProductByTitle(title));
+            if (string.IsNullOrEmpty(name) == false)
+                return Ok(_productRepository.FindProductByTitle(name));
             else
                 return BadRequest();
         }
