@@ -56,6 +56,14 @@ namespace delivery.Controllers
             return Ok(order);
         }
 
+        [Route("deliverOrder/{id}")]
+        [HttpDelete]
+        public IActionResult DeliverOrder(int id)
+        {
+            _deliveryRepository.DeliverOrder(id);
+            return RedirectToRoute("GetAllDeliveries");
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

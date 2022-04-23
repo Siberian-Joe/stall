@@ -12,7 +12,7 @@ using delivery.DAL;
 namespace delivery.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220423063501_Initial")]
+    [Migration("20220423083040_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

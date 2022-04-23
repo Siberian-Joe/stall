@@ -15,11 +15,42 @@ namespace delivery.DAL.Repositories
             _context.SaveChanges();
         }
 
+        public Delivery DeliverOrder (int id)
+        {
+            Delivery delivery = Get(id);
+
+            if (delivery != null)
+            {
+                _context.Orders.Remove(delivery.Order);
+                _context.Deliveries.Remove(delivery);
+                _context.SaveChanges();
+            }
+
+            return delivery;
+        }
+
         public override void Create(Delivery delivery)
         {
-            delivery.Order = _context.Orders.FirstOrDefault();
+            delivery.Order = _context.Orders.FirstOrDefault(context => context.DeliveryId == null);
 
             base.Create(delivery);
+        }
+
+        public override Delivery Delete(int id)
+        {
+            Delivery delivery = Get(id);
+
+            if (delivery != null)
+            {
+                Order order = _context.Orders.Find(delivery.Order.Id);
+                order.DeliveryId = null;
+
+                GetData().Remove(delivery);
+
+                _context.SaveChanges();
+            }
+
+            return delivery;
         }
 
         protected override DbSet<Delivery> GetData()
