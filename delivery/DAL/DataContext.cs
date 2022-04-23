@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using orders.DAL.Models;
+﻿using delivery.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace orders.DAL
+namespace delivery.DAL
 {
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
+        public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
